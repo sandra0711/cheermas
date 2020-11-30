@@ -23,8 +23,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Отображаем главную страницу с использованием шаблона "index.hbs"
 app.get('/', function(req, res) {
-    res.render('index', req.query);
+  res.render('index', req.query);
 });
+const object = {
+ 'RED HOT': 'H - O - T!',
+ 'DO IT AGAIN': 'Go, Fight, Win',
+ '2 BITS': 'Holler!',
+ 'STOMP YOUR FEET': 'STOMP',
+}
+app.post('/cheers', function (req, res) {
+  if (req.body.cheer_name in object) {
+    res.render('index', {signText: object[req.body.cheer_name]})
+  } else {
+    res.render('index', { signText: 'нет такой команды' })
+  }
+});
+
+
 
 // Обработка ошибок.
 app.use((req, res, next) => {
