@@ -32,6 +32,7 @@ const object = {
  'STOMP YOUR FEET': 'STOMP',
 }
 app.post('/cheers', function (req, res) {
+  console.log(req.body);
   if (req.body.cheer_name in object) {
     res.render('index', {signText: object[req.body.cheer_name]})
   } else {
